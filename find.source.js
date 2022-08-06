@@ -7,12 +7,16 @@ var allocateSource = {
             console.log(sources[0].pos)
 
 
+
+
             creep.memory.source = alocatedSource
         }
     },
 
-    findAllocationAmounts: function (creep) {
-        var sources = creep.room.find(FIND_SOURCES);
+    // may need to pass creep and activate line 1 and disable line 2
+    findAllocationAmounts: function () {
+        //var sources = creep.room.find(FIND_SOURCES);
+        var sources = Game.spawns["Spawn1"].room.find(FIND_SOURCES)
         var sourceAllocation = {}
         for (var source in sources) {
             //find how many creeps can harvest from a node
@@ -51,7 +55,7 @@ var allocateSource = {
             surroundingTerrainx[2][2] = sourcex + 1
             surroundingTerrainy[2][2] = sourcey + 1
 
-            console.log(surroundingTerrainx, surroundingTerrainy)
+            //console.log(surroundingTerrainx, surroundingTerrainy)
 
             for (var i = 0; i < surroundingTerrainx.length; i++) {
                 for(var j = 0; j < surroundingTerrainx[i].length; j++) {

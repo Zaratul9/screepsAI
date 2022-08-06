@@ -1,9 +1,7 @@
 const roleHarvester = require("./role.harvester");
 const roleUpgrader = require("./role.upgrader");
 const roleBuilder = require("./role.builder");
-const roleMiner = require("./role.miner")
-
-const findSource = require("find.source")
+const roleMiner = require("./role.miner");
 
 var roleMain = {
     run: function () {
@@ -11,7 +9,6 @@ var roleMain = {
             var creep = Game.creeps[name];
             if (creep.memory.role == 'harvester') {
                 roleHarvester.run(creep);
-                findSource.findAllocationAmounts(creep)
             }
             if (creep.memory.role == 'upgrader') {
                 roleUpgrader.run(creep);

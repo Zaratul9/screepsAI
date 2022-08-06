@@ -3,23 +3,25 @@ const respawnBuilder = require("respawn.builder");
 const respawnUpgrader = require("respawn.upgrader");
 const respawnSpawner = require("respawn.spawner");
 
+
 var respawnMain= {
-    run: function () {
+    run: function (maxCreeps) {
 
 
-        var harvesters = _.filter(Game.creeps, (creep) => creep.memory.role === 'harvester');
-        var builders = _.filter(Game.creeps, (creep) => creep.memory.role === 'builder');
-        var upgraders = _.filter(Game.creeps, (creep) => creep.memory.role === 'upgrader');
-        var amount_of_energy = Game.spawns["Spawn1"].store.getUsedCapacity(RESOURCE_ENERGY)
-        var spawnActive = Game.spawns['Spawn1'].isActive()
+        var harvesters = _.filter(Game.creeps, (creep) => creep.memory.role === 'harvester').length;
+        var builders = _.filter(Game.creeps, (creep) => creep.memory.role === 'builder').length;
+        var upgraders = _.filter(Game.creeps, (creep) => creep.memory.role === 'upgrader').length;
+        var amount_of_energy = Game.spawns["Spawn1"].store.getUsedCapacity(RESOURCE_ENERGY);
+        var totalCreeps = harvesters + builders + upgraders;
+        var spawnActive = Game.spawns['Spawn1'].isActive();
 
-        if (amount_of_energy >= 200 && spawnActive) {
+        if (amount_of_energy >= 200 && spawnActive && totalCreeps <= maxCreeps) {
 
             //find lowest amount and increase creep amount
-            if (harvesters.length <= builders.length && harvesters.length <= upgraders.length) {
+            if (harvesters <= builders && harvesters <= upgraders) {
                 respawnHarvester.run()
             }
-            else if (upgraders.length <= builders.length) {
+            else if (upgraders <= builders) {
                 respawnUpgrader.run()
             }
             else {

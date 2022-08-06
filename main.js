@@ -8,6 +8,15 @@ const roleMain = require("role.main");
 //import rest of modules for main
 const respawnMain = require("respawn.main");
 const cleanMemory = require("module.cleanMemory");
+const findSource = require("find.source")
+
+
+var allocationAmounts = findSource.findAllocationAmounts()
+var maxCreeps = parseInt("0")
+
+for (var allocation in allocationAmounts) {
+    maxCreeps = parseInt(maxCreeps) + parseInt(allocationAmounts[allocation])
+}
 
 
 module.exports.loop = function () {
@@ -34,7 +43,7 @@ module.exports.loop = function () {
     //auto-spawning code for init setup of screeps room
 
     //auto-spawning of dead creeps module
-    respawnMain.run()
+    respawnMain.run(maxCreeps)
 
     //logic for room upgrades/expansions to the room controller
 
