@@ -8,7 +8,7 @@ var respawnUpgrader = {
         var newName = 'Upgrader' + Game.time;
         console.log('Spawning new upgrader: ' + newName);
         Game.spawns['Spawn1'].spawnCreep([WORK, CARRY, MOVE], newName,
-            {memory: {role: 'upgrader'}});
+            {memory: {role: 'upgrader', energySource: ""}});
     }
 };
 module.exports = respawnUpgrader;

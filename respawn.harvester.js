@@ -1,14 +1,15 @@
+const allocateSource = require("find.source")
+
 var respawnHarvester = {
 
     /** @param {Creep} creep **/
     run: function () {
-        var harvesters = _.filter(Game.creeps, (creep) => creep.memory.role == 'harvester');
-        //console.log('Harvesters: ' + harvesters.length);
+        var assignSource = allocateSource.run()
 
             var newName = 'Harvester' + Game.time;
             console.log('Spawning new harvester: ' + newName);
             Game.spawns['Spawn1'].spawnCreep([WORK, CARRY, MOVE], newName,
-                {memory: {role: 'harvester'}});
+                {memory: {role: 'harvester', energySource: ""}});
     }
 };
 module.exports = respawnHarvester;

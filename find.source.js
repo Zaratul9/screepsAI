@@ -1,15 +1,28 @@
 var allocateSource = {
 
 
-    run: function (creep) {
-        for (var source in sources) {
-            //find how many creeps can harvest from a node
-            console.log(sources[0].pos)
+    run: function () { //may need to pass creep and enable the creep.memory.source line
+        var sources = Game.spawns["Spawn1"].room.find(FIND_SOURCES)
+        for (var gameCreeps in Game.creeps) {
+            try {
+                console.log(gameCreeps, Game.creeps[gameCreeps].memory.energySource)
+                if (Game.creeps[gameCreeps].memory.energySource == "") {
+                    for (var source in sources) {
+                        //find how many creeps can harvest from a node
+                        var sourceAllocation = Game.spawns["Spawn1"].memory[sources[source].id]
+                        var creepsAllocatedToSource = _.filter(Game.creeps, (creep) => creep.memory.energySource === sources[source].id).length;
+                        console.log(sourceAllocation, creepsAllocatedToSource, sources[source].id)
+                        if (sourceAllocation >= creepsAllocatedToSource) {
+                            Game.creeps[gameCreeps].memory.energySource = sources[source].id
+                            console.log("writing memory", sources[source].id)
+                            break
+                        }
+                    }
+                }
+            } catch (error){
+                console.log(error)
+            }
 
-
-
-
-            creep.memory.source = alocatedSource
         }
     },
 
@@ -63,14 +76,15 @@ var allocateSource = {
                 }
             }
 
-            for (var i = 0; i < surroundingTerrain.length; i++) {
-                for(var j = 0; j < surroundingTerrain[i].length; j++) {
-                    if (surroundingTerrain[i][j] === 0) {
+            for (var k = 0; k < surroundingTerrain.length; k++) {
+                for(var l = 0; l < surroundingTerrain[k].length; l++) {
+                    if (surroundingTerrain[k][l] === 0) {
                         allocationAmount++
                     }
                 }
             }
-
+            //console.log(source.id)
+            Game.spawns["Spawn1"].memory[sources[source].id] = allocationAmount
             sourceAllocation[source] = allocationAmount
         }
         
