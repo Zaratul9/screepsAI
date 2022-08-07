@@ -2,6 +2,7 @@ const roleHarvester = require("./role.harvester");
 const roleUpgrader = require("./role.upgrader");
 const roleBuilder = require("./role.builder");
 const roleMiner = require("./role.miner");
+const roleAttacker = require("./role.attacker");
 
 var roleMain = {
     run: function () {
@@ -18,6 +19,9 @@ var roleMain = {
             }
             if (creep.memory.role == "miner") {
                 roleMiner.run(creep);
+            }
+            if (creep.memory.role == "attacker") {
+                roleAttacker.run(creep);
             }
         }
     }
