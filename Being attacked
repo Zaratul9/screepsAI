@@ -1,0 +1,18 @@
+
+        var spawn = Game.spawns['Spawn1'];
+        var attackers = spawn.room.find(FIND_HOSTILE_CREEPS, {
+            filter: (creep) => {
+                return creep.getActiveBodyparts(ATTACK) +  creep.getActiveBodyparts(RANGED_ATTACK) > 0;
+            }
+        });
+        //console.log(attackers)
+        var beingAttacked = false
+        if (attackers.length > 0) {
+            console.log("being attacked")
+            beingAttacked = true
+        }
+
+        if (beingAttacked && amount_of_energy >= 250) {
+                    respawnAttacker.run()
+                    beingAttacked = false
+                }

@@ -5,16 +5,16 @@ var allocateSource = {
         var sources = Game.spawns["Spawn1"].room.find(FIND_SOURCES)
         for (var gameCreeps in Game.creeps) {
             try {
-                console.log(gameCreeps, Game.creeps[gameCreeps].memory.energySource)
+                //console.log(gameCreeps, Game.creeps[gameCreeps].memory.energySource)
                 if (Game.creeps[gameCreeps].memory.energySource == "") {
                     for (var source in sources) {
                         //find how many creeps can harvest from a node
                         var sourceAllocation = Game.spawns["Spawn1"].memory[sources[source].id]
                         var creepsAllocatedToSource = _.filter(Game.creeps, (creep) => creep.memory.energySource === sources[source].id).length;
-                        console.log(sourceAllocation, creepsAllocatedToSource, sources[source].id)
+                        //console.log(sourceAllocation, creepsAllocatedToSource, sources[source].id)
                         if (sourceAllocation >= creepsAllocatedToSource) {
                             Game.creeps[gameCreeps].memory.energySource = sources[source].id
-                            console.log("writing memory", sources[source].id)
+                            console.log("writing memory", sources[source].id, gameCreeps)
                             break
                         }
                     }
