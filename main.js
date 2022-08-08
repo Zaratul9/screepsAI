@@ -15,7 +15,7 @@ var allocationAmounts = findSource.findAllocationAmounts()
 var maxCreeps = parseInt("0")
 
 for (var allocation in allocationAmounts) {
-    maxCreeps = parseInt(maxCreeps) + parseInt(allocationAmounts[allocation]) + 1
+    maxCreeps = parseInt(maxCreeps) + parseInt(allocationAmounts[allocation]) + 2
 }
 
 

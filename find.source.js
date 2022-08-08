@@ -9,7 +9,7 @@ var allocateSource = {
                 if (Game.creeps[gameCreeps].memory.energySource == "") {
                     for (var source in sources) {
                         //find how many creeps can harvest from a node
-                        var sourceAllocation = Game.spawns["Spawn1"].memory[sources[source].id]
+                        var sourceAllocation = parseInt(Game.spawns["Spawn1"].memory[sources[source].id]) + 1
                         var creepsAllocatedToSource = _.filter(Game.creeps, (creep) => creep.memory.energySource === sources[source].id).length;
                         //console.log(sourceAllocation, creepsAllocatedToSource, sources[source].id)
                         if (sourceAllocation >= creepsAllocatedToSource) {
